@@ -175,7 +175,7 @@ void makeplot(){
 	nbin[3] = 300;
 	title_axis = "offline phi LargeSpecial;offline phi LargeSpecial;Entries";
 	title_png = dir + "offlinephi_LargeSpecial.png";
-	draw_hist(fname,Form("h_offphi_LargeSpecial_0GeV",nbin,title_axis,title_png);
+	draw_hist(fname,"h_offphi_LargeSpecial_0GeV",nbin,title_axis,title_png);
 
 	//L1 plot
 	nbin[0] = -2.5;
@@ -495,7 +495,7 @@ void makeplot(){
 	nbin[3] = 300;
 	title_axis = "SAphims LargeSpecial;SAphims LargeSpecial;Entries";
 	title_png = dir + "SAphims_LargeSpecial.png";
-	draw_hist(fname,Form("h_saphims_LargeSpecial_0GeV",nbin,title_axis,title_png);
+	draw_hist(fname,"h_saphims_LargeSpecial_0GeV",nbin,title_axis,title_png);
 
 	nbin[0] = -2.5;
 	nbin[1] = 0;
@@ -503,7 +503,7 @@ void makeplot(){
 	nbin[3] = 300;
 	title_axis = "SARoIphi LargeSpecial;SARoIphi LargeSpecial;Entries";
 	title_png = dir + "SARoIphi_LargeSpecial.png";
-	draw_hist(fname,Form("h_saroiphi_LargeSpecial_0GeV",nbin,title_axis,title_png);
+	draw_hist(fname,"h_saroiphi_LargeSpecial_0GeV",nbin,title_axis,title_png);
 
 	//CB plot
 	for(Int_t num = 0;num < number;num++){
