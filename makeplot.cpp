@@ -158,7 +158,7 @@ void makeplot(){
 	//TFile *tf1 = new TFile("~/dataset/plot2.root");
 	//TFile *tf1 = new TFile("~/kayamash/data18_physics_Main_Ztap_hadd.root");
 	//string fname = "/gpfs/fs6001/kayamash/Mywork/efficiencyloopoutput/plotadd2.root";
-	string fname = "/gpfs/fs6001/kayamash/Mywork/comparison/oldplot.root";
+	string fname = "/gpfs/fs6001/kayamash/Mywork/efficiencyloopoutput/L1MU20plot.root";
 	//string dir = "~/plot/data18all/";
 	string dir = "~/plot/old/";
 
