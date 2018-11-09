@@ -236,6 +236,72 @@ void makeplot(){
 	nbin[1] = 0;
 	nbin[2] = 81;
 	nbin[3] = 1.1;
+	title_axis = "SAEfficiency LargeSpecial;offline pt[GeV];efficiency";
+	title_png = dir + "SAEfficiency_LargeSpecial11.png";
+	for(Int_t num = 0;num < number;num++){
+		graph[num] = Form("SAEfficiencyLargeSpecial11_%dGeV",num*4);
+	}
+	draw_allplot(fname,number,graph,nbin,title_axis,title_png);
+
+	nbin[0] = -2.0;
+	nbin[1] = 0;
+	nbin[2] = 81;
+	nbin[3] = 1.1;
+	title_axis = "SAEfficiency LargeSpecial;offline pt[GeV];efficiency";
+	title_png = dir + "SAEfficiency_LargeSpecial11+.png";
+	for(Int_t num = 0;num < number;num++){
+		graph[num] = Form("SAEfficiencyLargeSpecialplus11_%dGeV",num*4);
+	}
+	draw_allplot(fname,number,graph,nbin,title_axis,title_png);
+
+	nbin[0] = -2.0;
+	nbin[1] = 0;
+	nbin[2] = 81;
+	nbin[3] = 1.1;
+	title_axis = "SAEfficiency LargeSpecial;offline pt[GeV];efficiency";
+	title_png = dir + "SAEfficiency_LargeSpecial11-.png";
+	for(Int_t num = 0;num < number;num++){
+		graph[num] = Form("SAEfficiencyLargeSpecialminus11_%dGeV",num*4);
+	}
+	draw_allplot(fname,number,graph,nbin,title_axis,title_png);
+
+	nbin[0] = -2.0;
+	nbin[1] = 0;
+	nbin[2] = 81;
+	nbin[3] = 1.1;
+	title_axis = "SAEfficiency LargeSpecial;offline pt[GeV];efficiency";
+	title_png = dir + "SAEfficiency_LargeSpecial15.png";
+	for(Int_t num = 0;num < number;num++){
+		graph[num] = Form("SAEfficiencyLargeSpecial15_%dGeV",num*4);
+	}
+	draw_allplot(fname,number,graph,nbin,title_axis,title_png);
+
+	nbin[0] = -2.0;
+	nbin[1] = 0;
+	nbin[2] = 81;
+	nbin[3] = 1.1;
+	title_axis = "SAEfficiency LargeSpecial;offline pt[GeV];efficiency";
+	title_png = dir + "SAEfficiency_LargeSpecial15+.png";
+	for(Int_t num = 0;num < number;num++){
+		graph[num] = Form("SAEfficiencyLargeSpecialplus15_%dGeV",num*4);
+	}
+	draw_allplot(fname,number,graph,nbin,title_axis,title_png);
+
+	nbin[0] = -2.0;
+	nbin[1] = 0;
+	nbin[2] = 81;
+	nbin[3] = 1.1;
+	title_axis = "SAEfficiency LargeSpecial;offline pt[GeV];efficiency";
+	title_png = dir + "SAEfficiency_LargeSpecial15-.png";
+	for(Int_t num = 0;num < number;num++){
+		graph[num] = Form("SAEfficiencyLargeSpecialminus15_%dGeV",num*4);
+	}
+	draw_allplot(fname,number,graph,nbin,title_axis,title_png);
+
+	nbin[0] = -2.0;
+	nbin[1] = 0;
+	nbin[2] = 81;
+	nbin[3] = 1.1;
 	title_axis = "SAEfficiency Small;offline pt[GeV];efficiency";
 	title_png = dir + "SAEfficiency_Small.png";
 	for(Int_t num = 0;num < number;num++){
@@ -332,6 +398,66 @@ void makeplot(){
 	nbin[1] = -2.0;
 	nbin[2] = 70;
 	nbin[3] = 2.0;
+	title_axis = "LargeSpecial Qeta/|eta|=+1;offline pt[GeV];SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("SAptresplusLS11_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptplusLS11_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = 0;
+	nbin[1] = -2.0;
+	nbin[2] = 70;
+	nbin[3] = 2.0;
+	title_axis = "LargeSpecial Qeta/|eta|=+1;offline pt[GeV];SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("SAptresplusLS11+_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptplusLSplus11_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = 0;
+	nbin[1] = -2.0;
+	nbin[2] = 70;
+	nbin[3] = 2.0;
+	title_axis = "LargeSpecial Qeta/|eta|=+1;offline pt[GeV];SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("SAptresplusLS11-_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptplusLSminus11_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = 0;
+	nbin[1] = -2.0;
+	nbin[2] = 70;
+	nbin[3] = 2.0;
+	title_axis = "LargeSpecial Qeta/|eta|=+1;offline pt[GeV];SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("SAptresplusLS15_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptplusLS15_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = 0;
+	nbin[1] = -2.0;
+	nbin[2] = 70;
+	nbin[3] = 2.0;
+	title_axis = "LargeSpecial Qeta/|eta|=+1;offline pt[GeV];SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("SAptresplusLS15+_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptplusLSplus15_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = 0;
+	nbin[1] = -2.0;
+	nbin[2] = 70;
+	nbin[3] = 2.0;
+	title_axis = "LargeSpecial Qeta/|eta|=+1;offline pt[GeV];SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("SAptresplusLS15-_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptplusLSminus15_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = 0;
+	nbin[1] = -2.0;
+	nbin[2] = 70;
+	nbin[3] = 2.0;
 	title_axis = "Small Qeta/|eta|=+1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
 		title_png = dir + Form("SAptresplus2_%dGeV.png",num*4);
@@ -366,6 +492,66 @@ void makeplot(){
 	for(Int_t num = 0;num < number;num++){
 		title_png = dir + Form("SAptresminus1_%dGeV.png",num*4);
 		draw_hist2d(fname,Form("h_off_ptvsSA_resptminus1_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = 0;
+	nbin[1] = -2.0;
+	nbin[2] = 70;
+	nbin[3] = 2.0;
+	title_axis = "LargeSpecial Qeta/|eta|=-1;offline pt[GeV];SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("SAptresminusLS11_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptminusLS11_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = 0;
+	nbin[1] = -2.0;
+	nbin[2] = 70;
+	nbin[3] = 2.0;
+	title_axis = "LargeSpecial Qeta/|eta|=-1;offline pt[GeV];SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("SAptresminusLS11+_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptminusLSplus11_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = 0;
+	nbin[1] = -2.0;
+	nbin[2] = 70;
+	nbin[3] = 2.0;
+	title_axis = "LargeSpecial Qeta/|eta|=-1;offline pt[GeV];SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("SAptresminusLS11-_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptminusLSminus11_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = 0;
+	nbin[1] = -2.0;
+	nbin[2] = 70;
+	nbin[3] = 2.0;
+	title_axis = "LargeSpecial Qeta/|eta|=-1;offline pt[GeV];SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("SAptresminusLS15_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptminusLS15_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = 0;
+	nbin[1] = -2.0;
+	nbin[2] = 70;
+	nbin[3] = 2.0;
+	title_axis = "LargeSpecial Qeta/|eta|=-1;offline pt[GeV];SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("SAptresminusLS15+_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptminusLSplus15_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = 0;
+	nbin[1] = -2.0;
+	nbin[2] = 70;
+	nbin[3] = 2.0;
+	title_axis = "LargeSpecial Qeta/|eta|=-1;offline pt[GeV];SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("SAptresminusLS15-_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptminusLSminus15_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
@@ -493,7 +679,7 @@ void makeplot(){
 	nbin[1] = 0;
 	nbin[2] = 2.5;
 	nbin[3] = 300;
-	title_axis = "SAphims LargeSpecial;SAphims LargeSpecial;Entries";
+	title_axis = "SAphims LargeSpecial;SAphims;Entries";
 	title_png = dir + "SAphims_LargeSpecial.png";
 	draw_hist(fname,"h_saphims_LargeSpecial_0GeV",nbin,title_axis,title_png);
 
@@ -501,7 +687,7 @@ void makeplot(){
 	nbin[1] = 0;
 	nbin[2] = 2.5;
 	nbin[3] = 300;
-	title_axis = "SARoIphi LargeSpecial;SARoIphi LargeSpecial;Entries";
+	title_axis = "SARoIphi LargeSpecial;SARoIphi;Entries";
 	title_png = dir + "SARoIphi_LargeSpecial.png";
 	draw_hist(fname,"h_saroiphi_LargeSpecial_0GeV",nbin,title_axis,title_png);
 
