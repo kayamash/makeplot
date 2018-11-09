@@ -201,7 +201,7 @@ void makeplot(){
 	//SA plot
 	nbin[0] = -2.0;
 	nbin[1] = 0;
-	nbin[2] = 61;
+	nbin[2] = 81;
 	nbin[3] = 1.1;
 	title_axis = "SAEfficiency;offline pt[GeV];efficiency";
 	title_png = dir + "SAEfficiency_ALL.png";
@@ -212,7 +212,7 @@ void makeplot(){
 
 	nbin[0] = -2.0;
 	nbin[1] = 0;
-	nbin[2] = 61;
+	nbin[2] = 81;
 	nbin[3] = 1.1;
 	title_axis = "SAEfficiency Large;offline pt[GeV];efficiency";
 	title_png = dir + "SAEfficiency_Large.png";
@@ -223,7 +223,7 @@ void makeplot(){
 
 	nbin[0] = -2.0;
 	nbin[1] = 0;
-	nbin[2] = 61;
+	nbin[2] = 81;
 	nbin[3] = 1.1;
 	title_axis = "SAEfficiency LargeSpecial;offline pt[GeV];efficiency";
 	title_png = dir + "SAEfficiency_LargeSpecial.png";
@@ -234,7 +234,7 @@ void makeplot(){
 
 	nbin[0] = -2.0;
 	nbin[1] = 0;
-	nbin[2] = 61;
+	nbin[2] = 81;
 	nbin[3] = 1.1;
 	title_axis = "SAEfficiency Small;offline pt[GeV];efficiency";
 	title_png = dir + "SAEfficiency_Small.png";
@@ -245,7 +245,7 @@ void makeplot(){
 
 	nbin[0] = -2.0;
 	nbin[1] = 0;
-	nbin[2] = 61;
+	nbin[2] = 81;
 	nbin[3] = 1.1;
 	title_axis = "SAEfficiency SmallSpecial;offline pt[GeV];efficiency";
 	title_png = dir + "SAEfficiency_SmallSpecial.png";
@@ -259,7 +259,7 @@ void makeplot(){
 	}
 	nbin[0] = -2.0;
 	nbin[1] = 0;
-	nbin[2] = 61;
+	nbin[2] = 81;
 	nbin[3] = 1.1;
 	title_axis = "SAEfficiency@Barrel;offline pt[GeV];efficiency";
 	title_png = dir + "SAEfficiency_Barrel.png";
@@ -270,7 +270,7 @@ void makeplot(){
 	}
 	nbin[0] = -2.5;
 	nbin[1] = 0;
-	nbin[2] = 61;
+	nbin[2] = 81;
 	nbin[3] = 1.1;
 	title_axis = "SAEfficiency@Endcap;offline pt[GeV];efficiency";
 	title_png = dir + "SAEfficiency_Endcap.png";
@@ -511,7 +511,7 @@ void makeplot(){
 	}
 	nbin[0] = -2.0;
 	nbin[1] = 0;
-	nbin[2] = 61;
+	nbin[2] = 81;
 	nbin[3] = 1.1;
 	title_axis = "CBEfficiency;offline pt[GeV];efficiency";
 	title_png = dir + "CBEfficiency_ALL.png";
@@ -522,7 +522,7 @@ void makeplot(){
 	}
 	nbin[0] = -2.0;
 	nbin[1] = 0;
-	nbin[2] = 61;
+	nbin[2] = 81;
 	nbin[3] = 1.1;
 	title_axis = "CBEfficiency@Barrel;offline pt[GeV];efficiency";
 	title_png = dir + "CBEfficiency_Barrel.png";
@@ -533,7 +533,7 @@ void makeplot(){
 	}
 	nbin[0] = -2.0;
 	nbin[1] = 0;
-	nbin[2] = 61;
+	nbin[2] = 81;
 	nbin[3] = 1.1;
 	title_png = dir + "CBEfficiency_Endcap.png";
 	title_axis = "CBEfficiency@Endcap;offline pt[GeV];efficiency";
@@ -567,7 +567,7 @@ void makeplot(){
 	}
 	nbin[0] = -2.0;
 	nbin[1] = 0;
-	nbin[2] = 61;
+	nbin[2] = 81;
 	nbin[3] = 1.1;
 	title_axis = "EFEfficiency;offline pt[GeV];efficiency";
 	title_png = dir + "EFEfficiency_ALL.png";
@@ -578,7 +578,7 @@ void makeplot(){
 	}
 	nbin[0] = -2.0;
 	nbin[1] = 0;
-	nbin[2] = 61;
+	nbin[2] = 81;
 	nbin[3] = 1.1;
 	title_axis = "EFEfficiency@Barrel;offline pt[GeV];efficiency";
 	title_png = dir + "EFEfficiency_Barrel.png";
@@ -589,7 +589,7 @@ void makeplot(){
 	}
 	nbin[0] = -2.0;
 	nbin[1] = 0;
-	nbin[2] = 61;
+	nbin[2] = 81;
 	nbin[3] = 1.1;
 	title_axis = "EFEfficiency@Endcap;offline pt[GeV];efficiency";
 	title_png = dir + "EFEfficiency_Endcap.png";
