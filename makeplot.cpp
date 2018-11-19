@@ -114,7 +114,7 @@ void draw_samehist2d(string filename,Int_t num,string *graph,Double_t *nbin,stri
 		hist.at(number)->SetFillColor(color[number]);
 		hist.at(number)->SetStats(0);
 		hist.at(number)->SetTitle(title_axis.c_str());
-		hist.at(number)->Draw("scat same");
+		hist.at(number)->Draw("colz same");
 	}
 	c1->RedrawAxis();
 	c1->SaveAs(title_png.c_str());
@@ -180,10 +180,10 @@ void makeplot(){
 	//TFile *tf1 = new TFile("~/kayamash/data18_physics_Main_Ztap_hadd.root");
 	//string fname = "/gpfs/fs6001/kayamash/Mywork/efficiencyloopoutput/plotadd2.root";
 	//string fname = "/gpfs/fs6001/kayamash/Mywork/efficiencyloopoutput/L1MU20plot.root";
-	//string fname = "/gpfs/fs6001/kayamash/Mywork/efficiencyloopoutput/newdata18_physics_Main_Ztap.root";
-	string fname = "/gpfs/fs6001/kayamash/Mywork/efficiencyloopoutput/newmc16345099.root";
-	string dir = "~/plot/mc16345099/";
-	//string dir = "~/plot/data18physics_main/";
+	string fname = "/gpfs/fs6001/kayamash/Mywork/efficiencyloopoutput/newdata18_physics_Main_Ztap.root";
+	//string fname = "/gpfs/fs6001/kayamash/Mywork/efficiencyloopoutput/newmc16345099.root";
+	//string dir = "~/plot/mc16345099/";
+	string dir = "~/plot/data18physics_main/";
 
 	Int_t number = 1;
 	string graph[8];
