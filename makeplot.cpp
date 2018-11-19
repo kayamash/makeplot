@@ -101,8 +101,8 @@ void draw_hist2d(string filename,string graph,Double_t *nbin,string title_axis,s
 	delete hist;
 }
 
-void draw_same2dhist(string filename,Int_t num,string *graph,Double_t *nbin,string title_axis,string title_png){
-	TCanvas *c1 = new TCanvas("c1","c1",1600,900);
+void draw_samehist2d(string filename,Int_t num,string *graph,Double_t *nbin,string title_axis,string title_png){
+	TCanvas *c1 = new TCanvas("c1","c1",1000,1000);
 	TH1F *frame1 = gPad->DrawFrame(nbin[0],nbin[1],nbin[2],nbin[3]);
 	frame1->SetTitle(title_axis.c_str());
 	TFile *tf1 = new TFile(filename.c_str());
@@ -113,18 +113,11 @@ void draw_same2dhist(string filename,Int_t num,string *graph,Double_t *nbin,stri
 		hist.at(number)->SetFillColor(color[number]);
 		hist.at(number)->SetStats(0);
 		hist.at(number)->SetTitle(title_axis.c_str());
-		hist.at(number)->Draw("col same");
+		hist.at(number)->Draw("scat same");
 	}
 	c1->RedrawAxis();
-	TLegend *legend1 = new TLegend(0.7,0.7,0.9,0.9,"");
-	for(Int_t number = 0;number < num;number++){
-		legend1->AddEntry(hist.at(number),graph[number].c_str(),"lep");
-	}
-	legend1->Draw();
 	c1->SaveAs(title_png.c_str());
-
 	delete c1;
-	delete legend1;
 	hist.clear();
 }
 
@@ -185,11 +178,13 @@ void makeplot(){
 	//TFile *tf1 = new TFile("~/dataset/plot2.root");
 	//TFile *tf1 = new TFile("~/kayamash/data18_physics_Main_Ztap_hadd.root");
 	//string fname = "/gpfs/fs6001/kayamash/Mywork/efficiencyloopoutput/plotadd2.root";
-	string fname = "/gpfs/fs6001/kayamash/Mywork/efficiencyloopoutput/L1MU20plot.root";
-	//string dir = "~/plot/data18all/";
-	string dir = "~/plot/old/";
+	//string fname = "/gpfs/fs6001/kayamash/Mywork/efficiencyloopoutput/L1MU20plot.root";
+	//string fname = "/gpfs/fs6001/kayamash/Mywork/efficiencyloopoutput/newdata18_physics_Main_Ztap.root";
+	string fname = "/gpfs/fs6001/kayamash/Mywork/efficiencyloopoutput/newmc16345099.root";
+	string dir = "~/plot/mc16345099/";
+	//string dir = "~/plot/data18physics_main/";
 
-	Int_t number = 8;
+	Int_t number = 1;
 	string graph[8];
 	Double_t nbin[4];
 	string title_axis;
@@ -226,6 +221,7 @@ void makeplot(){
 	}
 
 	//SA plot
+/*
 	nbin[0] = -2.0;
 	nbin[1] = 0;
 	nbin[2] = 81;
@@ -247,7 +243,7 @@ void makeplot(){
 		graph[num] = Form("SAEfficiencyLarge_%dGeV",num*4);
 	}
 	draw_allplot(fname,number,graph,nbin,title_axis,title_png);
-/*
+
 	nbin[0] = -2.0;
 	nbin[1] = 0;
 	nbin[2] = 81;
@@ -401,6 +397,7 @@ void makeplot(){
 		draw_hist2d(fname,Form("SA2DEfficiency_%dGeV",num*4),nbin,title_axis,title_png);	
 	}
 */
+
 	nbin[0] = 0;
 	nbin[1] = -2.0;
 	nbin[2] = 70;
@@ -420,7 +417,7 @@ void makeplot(){
 		title_png = dir + Form("SAptresLargeSpecialplus_%dGeV.png",num*4);
 		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialplus_%dGeV",num*4),nbin,title_axis,title_png);
 	}
-
+/*
 	nbin[0] = 0;
 	nbin[1] = -2.0;
 	nbin[2] = 70;
@@ -430,7 +427,7 @@ void makeplot(){
 		title_png = dir + Form("SAptresLargeSpecialplus11_%dGeV.png",num*4);
 		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialplus11_%dGeV",num*4),nbin,title_axis,title_png);
 	}
-
+*/
 	nbin[0] = 0;
 	nbin[1] = -2.0;
 	nbin[2] = 70;
@@ -438,7 +435,7 @@ void makeplot(){
 	title_axis = "LargeSpecial Qeta/|eta|=+1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
 		title_png = dir + Form("SAptresLargeSpecialplus11in_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialplus11in_%dGeV",num*4),nbin,title_axis,title_png);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptplusLargeSpecialplus11in_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
@@ -448,9 +445,9 @@ void makeplot(){
 	title_axis = "LargeSpecial Qeta/|eta|=+1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
 		title_png = dir + Form("SAptresLargeSpecialplus11out_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialplus11out_%dGeV",num*4),nbin,title_axis,title_png);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpcialplus11out_%dGeV",num*4),nbin,title_axis,title_png);
 	}
-
+/*
 	nbin[0] = 0;
 	nbin[1] = -2.0;
 	nbin[2] = 70;
@@ -460,7 +457,7 @@ void makeplot(){
 		title_png = dir + Form("SAptresLargeSpecialplus15_%dGeV.png",num*4);
 		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialplus15_%dGeV",num*4),nbin,title_axis,title_png);
 	}
-
+*/
 	nbin[0] = 0;
 	nbin[1] = -2.0;
 	nbin[2] = 70;
@@ -478,7 +475,7 @@ void makeplot(){
 	title_axis = "LargeSpecial Qeta/|eta|=+1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
 		title_png = dir + Form("SAptresLargeSpecialplus15in_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialplus15in_%dGeV",num*4),nbin,title_axis,title_png);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptplusLargeSpecialplus15in_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
@@ -520,7 +517,7 @@ void makeplot(){
 		title_png = dir + Form("SAptresLargeSpecialminus_%dGeV.png",num*4);
 		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialminus_%dGeV",num*4),nbin,title_axis,title_png);
 	}
-
+/*
 	nbin[0] = 0;
 	nbin[1] = -2.0;
 	nbin[2] = 70;
@@ -530,7 +527,7 @@ void makeplot(){
 		title_png = dir + Form("SAptresLargeSpecialminus11_%dGeV.png",num*4);
 		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialminus11_%dGeV",num*4),nbin,title_axis,title_png);
 	}
-//
+*/
 	nbin[0] = 0;
 	nbin[1] = -2.0;
 	nbin[2] = 70;
@@ -538,7 +535,7 @@ void makeplot(){
 	title_axis = "LargeSpecial Qeta/|eta|=-1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
 		title_png = dir + Form("SAptresLargeSpecialminus11in_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialminus11in_%dGeV",num*4),nbin,title_axis,title_png);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptplusLargeSpecialminus11in_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
@@ -548,9 +545,9 @@ void makeplot(){
 	title_axis = "LargeSpecial Qeta/|eta|=-1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
 		title_png = dir + Form("SAptresLargeSpecialminus11out_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialminus11out_%dGeV",num*4),nbin,title_axis,title_png);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpcialminus11out_%dGeV",num*4),nbin,title_axis,title_png);
 	}
-
+/*
 	nbin[0] = 0;
 	nbin[1] = -2.0;
 	nbin[2] = 70;
@@ -560,7 +557,7 @@ void makeplot(){
 		title_png = dir + Form("SAptresLargeSpecialminus15_%dGeV.png",num*4);
 		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialminus15_%dGeV",num*4),nbin,title_axis,title_png);
 	}
-
+*/
 	nbin[0] = 0;
 	nbin[1] = -2.0;
 	nbin[2] = 70;
@@ -578,7 +575,7 @@ void makeplot(){
 	title_axis = "LargeSpecial Qeta/|eta|=-1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
 		title_png = dir + Form("SAptresLargeSpecialminus15in_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialminus15in_%dGeV",num*4),nbin,title_axis,title_png);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptplusLargeSpecialminus15in_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
@@ -679,7 +676,6 @@ void makeplot(){
 	for(Int_t num = 0;num < number;num++){
 		title_png = dir + Form("SAresidualLargeSpecialunzoom%dGeV.png",num*4);
 		draw_hist(fname,Form("h_SA_resptLargeSpecialplus_%dGeV",num*4),nbin,title_axis,title_png);
-		draw_hist(fname,Form("h_SA_resptLargeSpecial_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = -1.0;
@@ -722,25 +718,26 @@ void makeplot(){
 	nbin[1] = -10000;
 	nbin[2] = 10000;
 	nbin[3] = 10000;
-	title_axis = "RPC hit XY;RPC hit X;RPC hit Y";
+	title_axis = "RPC hit XY;RPC hit X[mm];RPC hit Y[mm]";
 	title_png = dir + "RPChitXY.png";
-	draw_hist(fname,"h_rpchitXvsrpchitY_0GeV",nbin,title_axis,title_png);
+	draw_hist2d(fname,"h_rpchitXvsrpchitY_0GeV",nbin,title_axis,title_png);
 
 	nbin[0] = -25000;
 	nbin[1] = -25000;
 	nbin[2] = 25000;
 	nbin[3] = 25000;
-	title_axis = "MDT hit XY;MDT hit X;MDT hit Y";
+	title_axis = "MDT hit XY;MDT hit X[mm];MDT hit Y[mm]";
 	title_png = dir + "MDThitXY.png";
-	draw_hist(fname,"h_mdthitXvsmdthitY_0GeV",nbin,title_axis,title_png);
+	draw_hist2d(fname,"h_mdthitXvsmdthitY_0GeV",nbin,title_axis,title_png);
 
-	nbin[0] = -25000;
-	nbin[1] = -25000;
-	nbin[2] = 25000;
-	nbin[3] = 25000;
-	title_axis = "MDT hit XY;MDT hit X;MDT hit Y";
-	title_png = dir + "MDThitXY.png";
-	draw_hist(fname,"h_mdthitXvsmdthitY_0GeV",nbin,title_axis,title_png);
+	nbin[0] = -10000;
+	nbin[1] = -10000;
+	nbin[2] = 10000;
+	nbin[3] = 10000;
+	title_axis = "hit XY;hit X[mm];hit Y[mm]";
+	title_png = dir + "hitXY.png";
+	string gr[2] = {"h_rpchitXvsrpchitY_0GeV","h_mdthitXvsmdthitY_0GeV"};
+	draw_samehist2d(fname,2,gr,nbin,title_axis,title_png);
 
 	nbin[0] = -2.5;
 	nbin[1] = -2.0;
