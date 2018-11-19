@@ -101,6 +101,33 @@ void draw_hist2d(string filename,string graph,Double_t *nbin,string title_axis,s
 	delete hist;
 }
 
+void draw_same2dhist(string filename,Int_t num,string *graph,Double_t *nbin,string title_axis,string title_png){
+	TCanvas *c1 = new TCanvas("c1","c1",1600,900);
+	TH1F *frame1 = gPad->DrawFrame(nbin[0],nbin[1],nbin[2],nbin[3]);
+	frame1->SetTitle(title_axis.c_str());
+	TFile *tf1 = new TFile(filename.c_str());
+	vector<TH2F*> hist;
+	for(Int_t number = 0;number < num;number++){
+		hist.push_back(dynamic_cast<TH2F*>(tf1->Get(graph[number].c_str())));
+		hist.at(number)->SetLineColor(color[number]);
+		hist.at(number)->SetFillColor(color[number]);
+		hist.at(number)->SetStats(0);
+		hist.at(number)->SetTitle(title_axis.c_str());
+		hist.at(number)->Draw("col same");
+	}
+	c1->RedrawAxis();
+	TLegend *legend1 = new TLegend(0.7,0.7,0.9,0.9,"");
+	for(Int_t number = 0;number < num;number++){
+		legend1->AddEntry(hist.at(number),graph[number].c_str(),"lep");
+	}
+	legend1->Draw();
+	c1->SaveAs(title_png.c_str());
+
+	delete c1;
+	delete legend1;
+	hist.clear();
+}
+
 void draw_allhist(string filename,Int_t num,string *graph,Double_t *nbin,string title_axis,string title_png){
 	TCanvas *c1 = new TCanvas("c1","c1",1600,900);
 	TH1F *frame1 = gPad->DrawFrame(nbin[0],nbin[1],nbin[2],nbin[3]);
@@ -220,7 +247,7 @@ void makeplot(){
 		graph[num] = Form("SAEfficiencyLarge_%dGeV",num*4);
 	}
 	draw_allplot(fname,number,graph,nbin,title_axis,title_png);
-
+/*
 	nbin[0] = -2.0;
 	nbin[1] = 0;
 	nbin[2] = 81;
@@ -373,15 +400,15 @@ void makeplot(){
 		title_png = dir + Form("SAEfficiency_%dGeV.png",num*4);
 		draw_hist2d(fname,Form("SA2DEfficiency_%dGeV",num*4),nbin,title_axis,title_png);	
 	}
-
+*/
 	nbin[0] = 0;
 	nbin[1] = -2.0;
 	nbin[2] = 70;
 	nbin[3] = 2.0;
 	title_axis = "Large Qeta/|eta|=+1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
-		title_png = dir + Form("SAptresplus0_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptplus0_%dGeV",num*4),nbin,title_axis,title_png);
+		title_png = dir + Form("SAptresLargeplus_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeplus_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
@@ -390,8 +417,8 @@ void makeplot(){
 	nbin[3] = 2.0;
 	title_axis = "LargeSpecial Qeta/|eta|=+1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
-		title_png = dir + Form("SAptresplus1_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptplus1_%dGeV",num*4),nbin,title_axis,title_png);
+		title_png = dir + Form("SAptresLargeSpecialplus_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialplus_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
@@ -400,8 +427,8 @@ void makeplot(){
 	nbin[3] = 2.0;
 	title_axis = "LargeSpecial Qeta/|eta|=+1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
-		title_png = dir + Form("SAptresplusLS11_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptplusLS11_%dGeV",num*4),nbin,title_axis,title_png);
+		title_png = dir + Form("SAptresLargeSpecialplus11_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialplus11_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
@@ -410,8 +437,8 @@ void makeplot(){
 	nbin[3] = 2.0;
 	title_axis = "LargeSpecial Qeta/|eta|=+1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
-		title_png = dir + Form("SAptresplusLS11+_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptplusLSplus11_%dGeV",num*4),nbin,title_axis,title_png);
+		title_png = dir + Form("SAptresLargeSpecialplus11in_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialplus11in_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
@@ -420,8 +447,8 @@ void makeplot(){
 	nbin[3] = 2.0;
 	title_axis = "LargeSpecial Qeta/|eta|=+1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
-		title_png = dir + Form("SAptresplusLS11-_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptplusLSminus11_%dGeV",num*4),nbin,title_axis,title_png);
+		title_png = dir + Form("SAptresLargeSpecialplus11out_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialplus11out_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
@@ -430,8 +457,8 @@ void makeplot(){
 	nbin[3] = 2.0;
 	title_axis = "LargeSpecial Qeta/|eta|=+1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
-		title_png = dir + Form("SAptresplusLS15_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptplusLS15_%dGeV",num*4),nbin,title_axis,title_png);
+		title_png = dir + Form("SAptresLargeSpecialplus15_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialplus15_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
@@ -440,8 +467,8 @@ void makeplot(){
 	nbin[3] = 2.0;
 	title_axis = "LargeSpecial Qeta/|eta|=+1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
-		title_png = dir + Form("SAptresplusLS15+_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptplusLSplus15_%dGeV",num*4),nbin,title_axis,title_png);
+		title_png = dir + Form("SAptresLargeSpecialplus15out_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialplus15out_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
@@ -450,8 +477,8 @@ void makeplot(){
 	nbin[3] = 2.0;
 	title_axis = "LargeSpecial Qeta/|eta|=+1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
-		title_png = dir + Form("SAptresplusLS15-_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptplusLSminus15_%dGeV",num*4),nbin,title_axis,title_png);
+		title_png = dir + Form("SAptresLargeSpecialplus15in_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialplus15in_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
@@ -460,8 +487,8 @@ void makeplot(){
 	nbin[3] = 2.0;
 	title_axis = "Small Qeta/|eta|=+1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
-		title_png = dir + Form("SAptresplus2_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptplus2_%dGeV",num*4),nbin,title_axis,title_png);
+		title_png = dir + Form("SAptresSmallplus_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptSmallplus_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
@@ -470,28 +497,18 @@ void makeplot(){
 	nbin[3] = 2.0;
 	title_axis = "SmallSpecial Qeta/|eta|=+1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
-		title_png = dir + Form("SAptresplus3_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptplus3_%dGeV",num*4),nbin,title_axis,title_png);
+		title_png = dir + Form("SAptresSmallSpecialplus_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptSmallSpecialplus_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
 	nbin[1] = -2.0;
 	nbin[2] = 70;
 	nbin[3] = 2.0;
-	title_axis = "Large Qeta/|eta|=-1;offline pt[GeV];SApt residual";
+	title_axis = "Large Qeta/|eta|=+-1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
-		title_png = dir + Form("SAptresminus0_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptminus0_%dGeV",num*4),nbin,title_axis,title_png);
-	}
-
-	nbin[0] = 0;
-	nbin[1] = -2.0;
-	nbin[2] = 70;
-	nbin[3] = 2.0;
-	title_axis = "LargeSpecial Qeta/|eta|=-1;offline pt[GeV];SApt residual";
-	for(Int_t num = 0;num < number;num++){
-		title_png = dir + Form("SAptresminus1_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptminus1_%dGeV",num*4),nbin,title_axis,title_png);
+		title_png = dir + Form("SAptresLargeminus_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeminus_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
@@ -500,8 +517,8 @@ void makeplot(){
 	nbin[3] = 2.0;
 	title_axis = "LargeSpecial Qeta/|eta|=-1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
-		title_png = dir + Form("SAptresminusLS11_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptminusLS11_%dGeV",num*4),nbin,title_axis,title_png);
+		title_png = dir + Form("SAptresLargeSpecialminus_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialminus_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
@@ -510,8 +527,18 @@ void makeplot(){
 	nbin[3] = 2.0;
 	title_axis = "LargeSpecial Qeta/|eta|=-1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
-		title_png = dir + Form("SAptresminusLS11+_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptminusLSplus11_%dGeV",num*4),nbin,title_axis,title_png);
+		title_png = dir + Form("SAptresLargeSpecialminus11_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialminus11_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+//
+	nbin[0] = 0;
+	nbin[1] = -2.0;
+	nbin[2] = 70;
+	nbin[3] = 2.0;
+	title_axis = "LargeSpecial Qeta/|eta|=-1;offline pt[GeV];SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("SAptresLargeSpecialminus11in_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialminus11in_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
@@ -520,8 +547,8 @@ void makeplot(){
 	nbin[3] = 2.0;
 	title_axis = "LargeSpecial Qeta/|eta|=-1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
-		title_png = dir + Form("SAptresminusLS11-_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptminusLSminus11_%dGeV",num*4),nbin,title_axis,title_png);
+		title_png = dir + Form("SAptresLargeSpecialminus11out_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialminus11out_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
@@ -530,8 +557,8 @@ void makeplot(){
 	nbin[3] = 2.0;
 	title_axis = "LargeSpecial Qeta/|eta|=-1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
-		title_png = dir + Form("SAptresminusLS15_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptminusLS15_%dGeV",num*4),nbin,title_axis,title_png);
+		title_png = dir + Form("SAptresLargeSpecialminus15_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialminus15_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
@@ -540,8 +567,8 @@ void makeplot(){
 	nbin[3] = 2.0;
 	title_axis = "LargeSpecial Qeta/|eta|=-1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
-		title_png = dir + Form("SAptresminusLS15+_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptminusLSplus15_%dGeV",num*4),nbin,title_axis,title_png);
+		title_png = dir + Form("SAptresLargeSpecialminus15out_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialminus15out_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
@@ -550,8 +577,8 @@ void makeplot(){
 	nbin[3] = 2.0;
 	title_axis = "LargeSpecial Qeta/|eta|=-1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
-		title_png = dir + Form("SAptresminusLS15-_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptminusLSminus15_%dGeV",num*4),nbin,title_axis,title_png);
+		title_png = dir + Form("SAptresLargeSpecialminus15in_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptLargeSpecialminus15in_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
@@ -560,8 +587,8 @@ void makeplot(){
 	nbin[3] = 2.0;
 	title_axis = "Small Qeta/|eta|=-1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
-		title_png = dir + Form("SAptresminus2_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptminus2_%dGeV",num*4),nbin,title_axis,title_png);
+		title_png = dir + Form("SAptresSmallminus_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptSmallminus_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = 0;
@@ -570,10 +597,9 @@ void makeplot(){
 	nbin[3] = 2.0;
 	title_axis = "SmallSpecial Qeta/|eta|=-1;offline pt[GeV];SApt residual";
 	for(Int_t num = 0;num < number;num++){
-		title_png = dir + Form("SAptresminus3_%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_off_ptvsSA_resptminus3_%dGeV",num*4),nbin,title_axis,title_png);
+		title_png = dir + Form("SAptresSmallSpecialminus_%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_off_ptvsSA_resptSmallSpecialminus_%dGeV",num*4),nbin,title_axis,title_png);
 	}
-
 
 	nbin[0] = -3.5;
 	nbin[1] = 0;
@@ -592,7 +618,7 @@ void makeplot(){
 	title_axis = "Large;offline phi;SApt residual";
 	for(Int_t num = 0;num < number;num++){
 		title_png = dir + Form("Largeres%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_offphivsSA_respt0_%dGeV",num*4),nbin,title_axis,title_png);
+		draw_hist2d(fname,Form("h_offphivsSA_resptLargeplus_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = -3.5;
@@ -602,7 +628,7 @@ void makeplot(){
 	title_axis = "LargeSpecial;offline phi;SApt residual";
 	for(Int_t num = 0;num < number;num++){
 		title_png = dir + Form("LargeSpecialres%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_offphivsSA_respt1_%dGeV",num*4),nbin,title_axis,title_png);
+		draw_hist2d(fname,Form("h_offphivsSA_resptLargeSpecialplus_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = -3.5;
@@ -612,7 +638,7 @@ void makeplot(){
 	title_axis = "Small;offline phi;SApt residual";
 	for(Int_t num = 0;num < number;num++){
 		title_png = dir + Form("Smallres%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_offphivsSA_respt2_%dGeV",num*4),nbin,title_axis,title_png);
+		draw_hist2d(fname,Form("h_offphivsSA_resptSmallplus_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = -3.5;
@@ -622,7 +648,7 @@ void makeplot(){
 	title_axis = "SmallSpecial;offline phi;SApt residual";
 	for(Int_t num = 0;num < number;num++){
 		title_png = dir + Form("SmallSpecialres%dGeV.png",num*4);
-		draw_hist2d(fname,Form("h_offphivsSA_respt3_%dGeV",num*4),nbin,title_axis,title_png);
+		draw_hist2d(fname,Form("h_offphivsSA_resptSmallSpecialplus_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = -1.0;
@@ -632,7 +658,7 @@ void makeplot(){
 	title_axis = "SAresidual Large;L2MuonSA residual pt;Entries";
 	for(Int_t num = 0;num < number;num++){
 		title_png = dir + Form("SAresidualLarge%dGeV.png",num*4);
-		draw_hist(fname,Form("h_SA_respt0_%dGeV",num*4),nbin,title_axis,title_png);
+		draw_hist(fname,Form("h_SA_resptLargeplus_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = -1.0;
@@ -642,7 +668,7 @@ void makeplot(){
 	title_axis = "SAresidual LargeSpecial;L2MuonSA residual pt;Entries";
 	for(Int_t num = 0;num < number;num++){
 		title_png = dir + Form("SAresidualLargeSpecial%dGeV.png",num*4);
-		draw_hist(fname,Form("h_SA_respt1_%dGeV",num*4),nbin,title_axis,title_png);
+		draw_hist(fname,Form("h_SA_resptLargeSpecialplus_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = -5.0;
@@ -652,7 +678,8 @@ void makeplot(){
 	title_axis = "SAresidual LargeSpecial;L2MuonSA residual pt;Entries";
 	for(Int_t num = 0;num < number;num++){
 		title_png = dir + Form("SAresidualLargeSpecialunzoom%dGeV.png",num*4);
-		draw_hist(fname,Form("h_SA_respt1_%dGeV",num*4),nbin,title_axis,title_png);
+		draw_hist(fname,Form("h_SA_resptLargeSpecialplus_%dGeV",num*4),nbin,title_axis,title_png);
+		draw_hist(fname,Form("h_SA_resptLargeSpecial_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = -1.0;
@@ -662,7 +689,7 @@ void makeplot(){
 	title_axis = "SAresidual Small;L2MuonSA residual pt;Entries";
 	for(Int_t num = 0;num < number;num++){
 		title_png = dir + Form("SAresidualSmall%dGeV.png",num*4);
-		draw_hist(fname,Form("h_SA_respt2_%dGeV",num*4),nbin,title_axis,title_png);
+		draw_hist(fname,Form("h_SA_resptSmallplus_0GeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = -1.0;
@@ -672,7 +699,7 @@ void makeplot(){
 	title_axis = "SAresidual SmallSpecial;L2MuonSA residual pt;Entries";
 	for(Int_t num = 0;num < number;num++){
 		title_png = dir + Form("SAresidualSmallSpecial%dGeV.png",num*4);
-		draw_hist(fname,Form("h_SA_respt3_%dGeV",num*4),nbin,title_axis,title_png);
+		draw_hist(fname,Form("h_SA_resptSmallSpecialplus_%dGeV",num*4),nbin,title_axis,title_png);
 	}
 
 	nbin[0] = -2.5;
@@ -690,6 +717,190 @@ void makeplot(){
 	title_axis = "SARoIphi LargeSpecial;SARoIphi;Entries";
 	title_png = dir + "SARoIphi_LargeSpecial.png";
 	draw_hist(fname,"h_saroiphi_LargeSpecial_0GeV",nbin,title_axis,title_png);
+
+	nbin[0] = -10000;
+	nbin[1] = -10000;
+	nbin[2] = 10000;
+	nbin[3] = 10000;
+	title_axis = "RPC hit XY;RPC hit X;RPC hit Y";
+	title_png = dir + "RPChitXY.png";
+	draw_hist(fname,"h_rpchitXvsrpchitY_0GeV",nbin,title_axis,title_png);
+
+	nbin[0] = -25000;
+	nbin[1] = -25000;
+	nbin[2] = 25000;
+	nbin[3] = 25000;
+	title_axis = "MDT hit XY;MDT hit X;MDT hit Y";
+	title_png = dir + "MDThitXY.png";
+	draw_hist(fname,"h_mdthitXvsmdthitY_0GeV",nbin,title_axis,title_png);
+
+	nbin[0] = -25000;
+	nbin[1] = -25000;
+	nbin[2] = 25000;
+	nbin[3] = 25000;
+	title_axis = "MDT hit XY;MDT hit X;MDT hit Y";
+	title_png = dir + "MDThitXY.png";
+	draw_hist(fname,"h_mdthitXvsmdthitY_0GeV",nbin,title_axis,title_png);
+
+	nbin[0] = -2.5;
+	nbin[1] = -2.0;
+	nbin[2] = 2.5;
+	nbin[3] = 1.0;
+	title_axis = "Large;offline eta;SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("Largereseta%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_offetavsSA_resptLargeplus_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = -2.5;
+	nbin[1] = -2.0;
+	nbin[2] = 2.5;
+	nbin[3] = 1.0;
+	title_axis = "LargeSpecial;offline eta;SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("LargeSpecialreseta%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_offetavsSA_resptLargeSpecialplus_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = -2.5;
+	nbin[1] = -2.0;
+	nbin[2] = 2.5;
+	nbin[3] = 1.0;
+	title_axis = "Small;offline eta;SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("Smallreseta%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_offetavsSA_resptSmallplus_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = -2.5;
+	nbin[1] = -2.0;
+	nbin[2] = 2.5;
+	nbin[3] = 1.0;
+	title_axis = "SmallSpecial;offline eta;SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("SmallSpecialreseta%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_offetavsSA_resptSmallSpecialplus_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = -2.5;
+	nbin[1] = -2.0;
+	nbin[2] = 2.5;
+	nbin[3] = 1.0;
+	title_axis = "eta vs residual;offline eta;SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("highLargeSpecial11outreseta%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_highoffetavsSA_resptLargeSpecialplus11out_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = -2.5;
+	nbin[1] = -2.0;
+	nbin[2] = 2.5;
+	nbin[3] = 1.0;
+	title_axis = "eta vs residual;offline eta;SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("highLargeSpecial11inreseta%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_highoffetavsSA_resptLargeSpecialplus11in_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = -2.5;
+	nbin[1] = -2.0;
+	nbin[2] = 2.5;
+	nbin[3] = 1.0;
+	title_axis = "eta vs residual;offline eta;SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("highLargeSpecial15outreseta%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_highoffetavsSA_resptLargeSpecialplus15out_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = -2.5;
+	nbin[1] = -2.0;
+	nbin[2] = 2.5;
+	nbin[3] = 1.0;
+	title_axis = "eta vs residual;offline eta;SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("highLargeSpecial15inreseta%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_highoffetavsSA_resptLargeSpecialplus15in_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = -2.5;
+	nbin[1] = -2.0;
+	nbin[2] = 2.5;
+	nbin[3] = 1.0;
+	title_axis = "eta vs residual;MDT eta;SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("LargeSpecial11outresmdteta%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_mdtetavsSA_resptLargeSpecialplus11out_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = -2.5;
+	nbin[1] = -2.0;
+	nbin[2] = 2.5;
+	nbin[3] = 1.0;
+	title_axis = "eta vs residual;MDT eta;SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("LargeSpecial11inresmdteta%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_mdtetavsSA_resptLargeSpecialplus11in_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = -2.5;
+	nbin[1] = -2.0;
+	nbin[2] = 2.5;
+	nbin[3] = 1.0;
+	title_axis = "eta vs residual;MDT eta;SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("LargeSpecial15outresmdteta%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_mdtetavsSA_resptLargeSpecialplus15out_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = -2.5;
+	nbin[1] = -2.0;
+	nbin[2] = 2.5;
+	nbin[3] = 1.0;
+	title_axis = "eta vs residual;MDT eta;SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("highLargeSpecial15inresmdteta%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_mdtetavsSA_resptLargeSpecialplus15in_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = -8.5;
+	nbin[1] = -2.0;
+	nbin[2] = 8.5;
+	nbin[3] = 1.0;
+	title_axis = "etaIndex vs residual;etaIndex;SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("LargeSpecial11outresetaIndex%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_etaIndexvsSA_resptLargeSpecialplus11out_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = -8.5;
+	nbin[1] = -2.0;
+	nbin[2] = 8.5;
+	nbin[3] = 1.0;
+	title_axis = "etaIndex vs residual;etaIndex;SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("LargeSpecial11inresetaIndex%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_etaIndexvsSA_resptLargeSpecialplus11in_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = -8.5;
+	nbin[1] = -2.0;
+	nbin[2] = 8.5;
+	nbin[3] = 1.0;
+	title_axis = "etaIndex vs residual;etaIndex;SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("LargeSpecial15outresetaIndex%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_etaIndexvsSA_resptLargeSpecialplus15out_%dGeV",num*4),nbin,title_axis,title_png);
+	}
+
+	nbin[0] = -8.5;
+	nbin[1] = -2.0;
+	nbin[2] = 8.5;
+	nbin[3] = 1.0;
+	title_axis = "etaIndex vs residual;etaIndex;SApt residual";
+	for(Int_t num = 0;num < number;num++){
+		title_png = dir + Form("highLargeSpecial15inresetaIndex%dGeV.png",num*4);
+		draw_hist2d(fname,Form("h_etaIndexvsSA_resptLargeSpecialplus15in_%dGeV",num*4),nbin,title_axis,title_png);
+	}
 
 	//CB plot
 	for(Int_t num = 0;num < number;num++){
