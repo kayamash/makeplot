@@ -103,6 +103,7 @@ void draw_hist2d(string filename,string graph,Double_t *nbin,string title_axis,s
 
 void draw_samehist2d(string filename,Int_t num,string *graph,Double_t *nbin,string title_axis,string title_png){
 	TCanvas *c1 = new TCanvas("c1","c1",1000,1000);
+	gStyle->SetTitleYOffset(1.0);
 	TH1F *frame1 = gPad->DrawFrame(nbin[0],nbin[1],nbin[2],nbin[3]);
 	frame1->SetTitle(title_axis.c_str());
 	TFile *tf1 = new TFile(filename.c_str());
